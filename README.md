@@ -1,0 +1,2 @@
+# Simufoot
+Football game simulator
