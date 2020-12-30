@@ -6,15 +6,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Equipe extends ArrayList<Joueur> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nom;
 	private String pays;
 	private String ville;
 	private int[] resultats = { 0, 0, 0 };
 	private String strategie = "Neutre";
 
-	// TODO : Enlever la ligne 16
-	private List<Joueur> joueurs = new ArrayList<>();
-	private List<Match> matchsJoues = new ArrayList<>();;
+	private List<Match> matchsJoues = new ArrayList<>();
 
 	public Equipe(String nom, String pays, String ville) {
 		this.nom = nom;
@@ -32,6 +34,7 @@ public class Equipe extends ArrayList<Joueur> {
 	public void changerStrategie(String strategie) {
 		this.strategie = strategie;
 	}
+	
 
 //	public void ajouterJoueur(Joueur joueur) {
 //		this.joueurs.add(joueur);
@@ -48,7 +51,8 @@ public class Equipe extends ArrayList<Joueur> {
 
 	@Override
 	public String toString() {
-		return String.format("Equipe [nom=%s, pays=%s, ville=%s, resultats=%s, stratégie=%s, joueurs=%s, matchsJoues=%s]",
-				nom,pays,ville,Arrays.toString(resultats),strategie,joueurs,matchsJoues);
+		return String.format("Equipe [Nom : %s, Pays : %s, Ville : %s, Résultats : %s, Stratégie : %s, Joueurs=%s, Matchs joués : %s]",
+				nom,pays,ville,Arrays.toString(resultats),strategie,super.toString(),matchsJoues.toString());
 	}
+	
 }

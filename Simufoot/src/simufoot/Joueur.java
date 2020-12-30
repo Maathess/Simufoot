@@ -54,8 +54,10 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return "Joueur [nom=" + nom + ", prenom=" + prenom + ", origine=" + origine + ", poste=" + poste + ", numero="
-				+ numero + ", vitesse=" + vitesse + ", frappe=" + frappe + ", passe=" + passe + ", defense=" + defense
-				+ ", score=" + score + "]";
+		return String.format(
+				"%nJoueur : %n Nom : %s,%n Prénom : %s,%n Nationalité : %s,%n Poste : %s, Numéro : %s,%n Vitesse : %s,%n"
+				+ " Frappe : %s,%n Passe : %s, Défense : %s,%n Score : %s]",
+				nom, prenom, passe, origine, poste, numero, vitesse, frappe, passe, defense);
+
 	}
 }

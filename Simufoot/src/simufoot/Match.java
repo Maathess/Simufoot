@@ -40,7 +40,7 @@ public class Match {
 
 	@Override
 	public String toString() {
-		return String.format("Match [pays=%s, stade=%s, date=%, score=%s, résultat=%s, équipes=%s", 
+		return String.format("Match [Pays : %s, Stade : %s, Date : %s, Score : %s, Résultat : %s,%n Equipes : %s]", 
 				pays,stade,date, Arrays.toString(score), resultat,equipes);
 	}
 }
