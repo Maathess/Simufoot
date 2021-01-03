@@ -35,6 +35,14 @@ public class Equipe extends ArrayList<Joueur> {
 		this.strategie = strategie;
 	}
 	
+	public String listeJoueurs() {
+		StringBuilder sbJoueurs = new StringBuilder();
+		for (int i = 0; i < this.size(); i++) {
+			sbJoueurs.append(super.get(i).toString());
+		}
+		return sbJoueurs.toString();
+	}
+	
 
 //	public void ajouterJoueur(Joueur joueur) {
 //		this.joueurs.add(joueur);
@@ -51,8 +59,8 @@ public class Equipe extends ArrayList<Joueur> {
 
 	@Override
 	public String toString() {
-		return String.format("Equipe [Nom : %s, Pays : %s, Ville : %s, Résultats : %s, Stratégie : %s, Joueurs=%s, Matchs joués : %s]",
-				nom,pays,ville,Arrays.toString(resultats),strategie,super.toString(),matchsJoues.toString());
+		return String.format("Cette équipe à pour nom : %s, elle vient %s et joue dans le championnat de %s. Elle joue avec la stratégie suivante : %s.%nCette équipe a pour effectif : %s",
+				nom,ville,pays,strategie,listeJoueurs());
 	}
 	
 }

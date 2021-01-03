@@ -16,7 +16,7 @@ public class AppliSimufoot {
 		joueursParisiens.add(new Joueur("Marco", "Verratti", "Italie", "Milieu", 6, 70, 30, 85, 75));
 		
 		List<Joueur> joueursLyonnais = new ArrayList<>();
-		joueursLyonnais.add(new Joueur("Anthony", "Lopes", "Portugal", "Gardien", 1, 35, 75, 70, 5));
+		joueursLyonnais.add(new Joueur("Lopes","Anthony", "Portugal", "Gardien", 1, 35, 75, 70, 5));
 		domicile.add(joueursParisiens.get(0));
 		domicile.add(joueursParisiens.get(1));
 		
@@ -24,7 +24,7 @@ public class AppliSimufoot {
 		Match m = new Match("France", "Parc des Princes", LocalDateTime.now(), domicile, exterieur);
 		
 		System.out.println("Bienvenue sur Simufoot ! le jeu où vous pouvez créer votre propre équipe pour atteindre les sommets.");
-		final String menu = "MENU PRINCIPAL \n"
+		String menu = "MENU PRINCIPAL \n"
 				+ "\t 1-Accéder au tournoi\n"
 				+ "\t 2-Sauvegarder la partie\n"
 				+ "\t 3- Charger une partie\n"
@@ -34,6 +34,33 @@ public class AppliSimufoot {
 		int choixMenu = sc.nextInt();
 		
 		switch (choixMenu) {
+		case 1:
+			System.out.println("MENU TOURNOI : \n "
+					+ "1 - Choisir une équipe \n 2 - Créer une équipe");
+			int choixTournoi = sc.nextInt();
+			if (choixTournoi == 1) {
+				
+			}
+			else if(choixTournoi == 2) {
+				System.out.println("Quel nom vas-tu donner à cette équipe ?");
+				String nomEquipe = sc.next();
+				System.out.println("Cette équipe vient de quel pays?");
+				String paysEquipe = sc.next();
+				System.out.println("De quelle ville vient cette équipe ?");
+				String villeEquipe = sc.next();
+				Equipe nvlEquipe = new Equipe(nomEquipe, paysEquipe, villeEquipe);
+				System.out.println("Maintenant que l'équipe est crée, il faut ajouter des joueurs");
+				
+				
+			}
+			else {
+				System.out.println(menu);
+			}
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
 		case 4: {
 			System.out.println("Êtes-vous sur de vouloir quitter Simufoot ?\n1-OUI \t 2-NON");
 			int choixQuitter = sc.nextInt();
@@ -44,9 +71,12 @@ public class AppliSimufoot {
 			else {
 				System.out.println(menu);
 			}
+			break;
 		}
 		default:
+			sc.close();
 			throw new IllegalArgumentException("Le numéro choisi ne fait pas parti des choix disponibles : " + choixMenu);
+			
 		}
 		
 	}
