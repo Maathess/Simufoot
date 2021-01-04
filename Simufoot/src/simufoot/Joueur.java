@@ -1,8 +1,8 @@
 package simufoot;
 
 public class Joueur {
-	private String nom;
 	private String prenom;
+	private String nom;
 	private String origine;
 	private String poste;
 	private int numero;
@@ -12,10 +12,10 @@ public class Joueur {
 	private int defense;
 	private int score;
 
-	public Joueur(String nom, String prenom, String origine, String poste, int numero, int vitesse, int frappe,
+	public Joueur(String prenom, String nom,String origine, String poste, int numero, int vitesse, int frappe,
 			int passe, int defense) {
-		this.nom = nom;
 		this.prenom = prenom;
+		this.nom = nom;
 		this.origine = origine;
 		this.poste = poste;
 		this.numero = numero;
@@ -55,9 +55,9 @@ public class Joueur {
 	@Override
 	public String toString() {
 		return String.format(
-				"%nJoueur : %n Nom : %s,%n Prénom : %s,%n Nationalité : %s,%n Poste : %s,%n Numéro : %s,%n Vitesse : %s,%n"
+				"%nJoueur : %n Prénom : %s,%n Nom : %s,%n Nationalité : %s,%n Poste : %s,%n Numéro : %s,%n Vitesse : %s,%n"
 				+ " Frappe : %s,%n Passe : %s,%n Défense : %s,%n Score : %s",
-				nom, prenom, origine, poste, numero, vitesse, frappe, passe, defense,score);
+				prenom,nom, origine, poste, numero, vitesse, frappe, passe, defense,score);
 
 	}
 }

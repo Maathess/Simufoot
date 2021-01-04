@@ -43,6 +43,10 @@ public class Equipe extends ArrayList<Joueur> {
 		return sbJoueurs.toString();
 	}
 	
+	public String getNom() {
+		return nom;
+	}
+	
 
 //	public void ajouterJoueur(Joueur joueur) {
 //		this.joueurs.add(joueur);
