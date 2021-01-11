@@ -1,0 +1,14 @@
+Equipe : nom=PSG, pays=France, ville=Paris, resultats=[0, 0, 0], stratégie=Neutre
+Joueur : nom=Gérard, prenom=Leblond, origine=France, poste=Gardien, numero=1, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Nicolas, prenom=Lebrun, origine=France, poste=Attaquant, numero=2, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Vincent, prenom=Leblanc, origine=France, poste=Défenseur, numero=3, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=René, prenom=Legris, origine=France, poste=Défenseur, numero=4, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Théo, prenom=Leroux, origine=France, poste=Attaquant, numero=5, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Rachid, prenom=Lebleu, origine=France, poste=Attaquant, numero=6, vitesse=50, frappe=50, passe=50, defense=50
+Equipe : nom=OM, pays=France, ville=Marseille, resultats=[0, 0, 0], stratégie=Neutre
+Joueur : nom=Gérard, prenom=Leblond, origine=France, poste=Gardien, numero=1, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Nicolas, prenom=Lebrun, origine=France, poste=Attaquant, numero=2, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Vincent, prenom=Leblanc, origine=France, poste=Défenseur, numero=3, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=René, prenom=Legris, origine=France, poste=Défenseur, numero=4, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Théo, prenom=Leroux, origine=France, poste=Attaquant, numero=5, vitesse=50, frappe=50, passe=50, defense=50
+Joueur : nom=Rachid, prenom=Lebleu, origine=France, poste=Attaquant, numero=6, vitesse=50, frappe=50, passe=50, defense=50

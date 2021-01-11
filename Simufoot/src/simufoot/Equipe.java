@@ -11,9 +11,6 @@ public class Equipe extends ArrayList<Joueur> {
 	private String ville;
 	private int[] resultats = { 0, 0, 0 };
 	private String strategie = "Neutre";
-
-	// TODO : Enlever la ligne 16
-	private List<Joueur> joueurs = new ArrayList<>();
 	private List<Match> matchsJoues = new ArrayList<>();;
 
 	public Equipe(String nom, String pays, String ville) {
@@ -33,22 +30,19 @@ public class Equipe extends ArrayList<Joueur> {
 		this.strategie = strategie;
 	}
 
-//	public void ajouterJoueur(Joueur joueur) {
-//		this.joueurs.add(joueur);
-//	}
+	public void transfererJoueur(Joueur joueur, Equipe equipe) {
+		equipe.add(joueur);
+		this.remove(joueur);
+	}
 
-//	public void renvoyerJoueur(Joueur joueur) {
-//		this.joueurs.remove(joueur);
-//	}
-
-//	public void transfererJoueur(Joueur joueur, Equipe equipe) {
-//		equipe.joueurs.add(joueur);
-//		this.joueurs.remove(joueur);
-//	}
-
+	public String toStringSave() {
+		return String.format("nom=%s, pays=%s, ville=%s, resultats=%s, stratégie=%s",
+				nom,pays,ville,Arrays.toString(resultats),strategie);
+	}
+	
 	@Override
 	public String toString() {
-		return String.format("Equipe [nom=%s, pays=%s, ville=%s, resultats=%s, stratégie=%s, joueurs=%s, matchsJoues=%s]",
-				nom,pays,ville,Arrays.toString(resultats),strategie,joueurs,matchsJoues);
+		return String.format("Equipe [nom=%s, pays=%s, ville=%s, resultats=%s, stratégie=%s, matchsJoues=%s]",
+				nom,pays,ville,Arrays.toString(resultats),strategie,matchsJoues);
 	}
 }

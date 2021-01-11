@@ -10,7 +10,6 @@ public class Joueur {
 	private int frappe;
 	private int passe;
 	private int defense;
-	private int score;
 
 	public Joueur(String nom, String prenom, String origine, String poste, int numero, int vitesse, int frappe,
 			int passe, int defense) {
@@ -52,10 +51,15 @@ public class Joueur {
 		this.defense = defense;
 	}
 
+	public String toStringSave() {
+		return "nom=" + nom + ", prenom=" + prenom + ", origine=" + origine + ", poste=" + poste + ", numero="
+				+ numero + ", vitesse=" + vitesse + ", frappe=" + frappe + ", passe=" + passe + ", defense=" + defense;
+	}
+	
 	@Override
 	public String toString() {
 		return "Joueur [nom=" + nom + ", prenom=" + prenom + ", origine=" + origine + ", poste=" + poste + ", numero="
 				+ numero + ", vitesse=" + vitesse + ", frappe=" + frappe + ", passe=" + passe + ", defense=" + defense
-				+ ", score=" + score + "]";
+				+ ", score=" + getScore() + "]";
 	}
 }
