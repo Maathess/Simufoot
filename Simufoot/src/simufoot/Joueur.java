@@ -52,8 +52,8 @@ public class Joueur {
 	}
 
 	public String toStringSave() {
-		return "nom=" + nom + ", prenom=" + prenom + ", origine=" + origine + ", poste=" + poste + ", numero="
-				+ numero + ", vitesse=" + vitesse + ", frappe=" + frappe + ", passe=" + passe + ", defense=" + defense;
+		return nom + "," + prenom + "," + origine + "," + poste + ","
+				+ numero + "," + vitesse + "," + frappe + "," + passe + "," + defense;
 	}
 	
 	@Override

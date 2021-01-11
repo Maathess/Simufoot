@@ -36,7 +36,7 @@ public class Equipe extends ArrayList<Joueur> {
 	}
 
 	public String toStringSave() {
-		return String.format("nom=%s, pays=%s, ville=%s, resultats=%s, stratégie=%s",
+		return String.format("%s,%s,%s,%s,%s",
 				nom,pays,ville,Arrays.toString(resultats),strategie);
 	}
 	
