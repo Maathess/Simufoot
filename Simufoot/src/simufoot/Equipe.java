@@ -34,7 +34,7 @@ public class Equipe extends ArrayList<Joueur> {
 	public void changerStrategie(String strategie) {
 		this.strategie = strategie;
 	}
-	
+
 	public String listeJoueurs() {
 		StringBuilder sbJoueurs = new StringBuilder();
 		for (int i = 0; i < this.size(); i++) {
@@ -42,29 +42,29 @@ public class Equipe extends ArrayList<Joueur> {
 		}
 		return sbJoueurs.toString();
 	}
-	
+
 	public String getNom() {
 		return nom;
 	}
-	
 
-//	public void ajouterJoueur(Joueur joueur) {
-//		this.joueurs.add(joueur);
-//	}
+	public String toStringSave() {
+		return String.format("%s,%s,%s,%s,%s", nom, pays, ville, Arrays.toString(resultats), strategie);
+	}
 
-//	public void renvoyerJoueur(Joueur joueur) {
-//		this.joueurs.remove(joueur);
-//	}
+	public void renvoyerJoueur(Joueur joueur) {
+		this.remove(joueur);
+	}
 
-//	public void transfererJoueur(Joueur joueur, Equipe equipe) {
-//		equipe.joueurs.add(joueur);
-//		this.joueurs.remove(joueur);
-//	}
+	public void transfererJoueur(Joueur joueur, Equipe equipe) {
+		equipe.add(joueur);
+		this.remove(joueur);
+	}
 
 	@Override
 	public String toString() {
-		return String.format("Cette équipe à pour nom : %s, elle vient %s et joue dans le championnat de %s. Elle joue avec la stratégie suivante : %s.%nCette équipe a pour effectif : %s",
-				nom,ville,pays,strategie,listeJoueurs());
+		return String.format(
+				"Cette équipe à pour nom : %s, elle vient %s et joue dans le championnat de %s. Elle joue avec la stratégie suivante : %s.%nCette équipe a pour effectif : %s",
+				nom, ville, pays, strategie, listeJoueurs());
 	}
-	
+
 }

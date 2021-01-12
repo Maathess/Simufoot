@@ -12,7 +12,7 @@ public class Match {
 	private int[] score;
 	private String resultat;
 	private List<Equipe> equipes = new ArrayList<>();
-	
+
 	public Match(String pays, String stade, LocalDateTime date, Equipe equipeLocale, Equipe equipeExterieure) {
 		this.pays = pays;
 		this.stade = stade;
@@ -20,11 +20,11 @@ public class Match {
 		this.equipes.add(equipeLocale);
 		this.equipes.add(equipeExterieure);
 	}
-	
+
 	public LocalDateTime getDate() {
 		return date;
 	}
-	
+
 	public void simulerMatch() {
 		this.score[0] = 0;
 		this.score[1] = 0;
@@ -35,12 +35,12 @@ public class Match {
 		} else {
 			this.resultat = "Egalité";
 		}
-		
+
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Match [Pays : %s, Stade : %s, Date : %s, Score : %s, Résultat : %s,%n Equipes : %s]", 
-				pays,stade,date, Arrays.toString(score), resultat,equipes);
+		return String.format("Match [Pays : %s, Stade : %s, Date : %s, Score : %s, Résultat : %s,%n Equipes : %s]",
+				pays, stade, date, Arrays.toString(score), resultat, equipes);
 	}
 }

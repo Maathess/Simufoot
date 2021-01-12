@@ -12,7 +12,7 @@ public class Joueur {
 	private int defense;
 	private int score;
 
-	public Joueur(String prenom, String nom,String origine, String poste, int numero, int vitesse, int frappe,
+	public Joueur(String prenom, String nom, String origine, String poste, int numero, int vitesse, int frappe,
 			int passe, int defense) {
 		this.prenom = prenom;
 		this.nom = nom;
@@ -52,12 +52,17 @@ public class Joueur {
 		this.defense = defense;
 	}
 
+	public String toStringSave() {
+		return nom + "," + prenom + "," + origine + "," + poste + "," + numero + "," + vitesse + "," + frappe + ","
+				+ passe + "," + defense;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(
 				"%nJoueur : %n Prénom : %s,%n Nom : %s,%n Nationalité : %s,%n Poste : %s,%n Numéro : %s,%n Vitesse : %s,%n"
-				+ " Frappe : %s,%n Passe : %s,%n Défense : %s,%n Score : %s",
-				prenom,nom, origine, poste, numero, vitesse, frappe, passe, defense,score);
+						+ " Frappe : %s,%n Passe : %s,%n Défense : %s,%n Score : %s",
+				prenom, nom, origine, poste, numero, vitesse, frappe, passe, defense, score);
 
 	}
 }
