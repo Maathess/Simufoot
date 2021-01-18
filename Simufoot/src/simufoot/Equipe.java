@@ -24,6 +24,10 @@ public class Equipe extends ArrayList<Joueur> {
 		this.ville = ville;
 	}
 
+	// Une bonne méthode est une méthode avec peu d'arguments (3 max) 
+	// TODO : Objet Stade avec le pays
+	
+	// TODO : Déplacer la méthode dans la classe match
 	public void affronterEquipe(Equipe adversaire, String pays, String stade) {
 		Match match = new Match(pays, stade, LocalDateTime.now(), this, adversaire);
 		match.simulerMatch();

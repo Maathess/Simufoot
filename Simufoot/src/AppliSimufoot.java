@@ -30,7 +30,6 @@ public class AppliSimufoot {
 		equipes.get(1).add(new Joueur("Théo", "Leroux", "France", "Attaquant", 5, 50, 50, 50, 50));
 		equipes.get(1).add(new Joueur("Rachid", "Lebleu", "France", "Attaquant", 6, 50, 50, 50, 50));
 
-		
 		System.out.println(
 				"Bienvenue sur Simufoot ! le jeu où tu peux créer ta propre équipe pour atteindre les sommets !");
 		String menu = "MENU PRINCIPAL \n" + "\t 1 - Accéder au tournoi\n" + "\t 2 - Sauvegarder la partie\n"
@@ -61,24 +60,30 @@ public class AppliSimufoot {
 				String villeEquipe = sc.next();
 				Equipe nvlEquipe = new Equipe(nomEquipe, paysEquipe, villeEquipe);
 				equipes.add(nvlEquipe);
-				/*
-				 * System.out.
-				 * println("Maintenant que l'équipe est crée, il faut ajouter des joueurs");
-				 * 
-				 * nvlEquipe.add(creerJoueur(sc)); System.out.
-				 * println("Maintenant qu'un nouveau joueur a été ajouté. Souhaites-tu ajouter d'autres joueurs ou non ?"
-				 * + "\n 1 - Ajouter un autre joueur\n 2 - Je le ferais plus tard"); int
-				 * choixAjoutJoueur = sc.nextInt(); if (choixAjoutJoueur == 1) {
-				 * nvlEquipe.add(creerJoueur(sc)); }else { if (nvlEquipe.size() <= 11) {
-				 * System.out.
-				 * println("Ok, mais n'oublie pas d'ajouter d'autres joueurs plus tard car il n'y a pas assez de joueurs pour lancer le tournoi "
-				 * ); } }
-				 */
+
+				System.out.println("Maintenant que l'équipe est crée, il faut ajouter des joueurs");
+
+				nvlEquipe.add(creerJoueur(sc));
+				System.out.println(
+						"Maintenant qu'un nouveau joueur a été ajouté. Souhaites-tu ajouter d'autres joueurs ou non ?"
+								+ "\n 1 - Ajouter un autre joueur\n 2 - Je le ferais plus tard");
+				int choixAjoutJoueur = sc.nextInt();
+				if (choixAjoutJoueur == 1) {
+					nvlEquipe.add(creerJoueur(sc));
+				} else {
+					if (nvlEquipe.size() <= 11) {
+						System.out.println(
+								"Ok, mais n'oublie pas d'ajouter d'autres joueurs plus tard car il n'y a pas assez de joueurs pour lancer le tournoi ");
+					}
+				}
+
 			} else {
 				System.out.println(menu);
 			}
 			break;
 		case 2:
+			System.out.println("La partie a été sauvegardé");
+			sauvegarde(equipes);
 			break;
 		case 3:
 			break;
@@ -99,7 +104,29 @@ public class AppliSimufoot {
 					"Le numéro choisi ne fait pas parti des choix disponibles : " + choixMenu);
 
 		}
-		sauvegarde(equipes);
+
+	}
+
+	private static Joueur creerJoueur(Scanner sc) {
+		System.out.println("Quel sera le prénom de ce joueur ?");
+		String prenom = sc.next();
+		System.out.println("Quel sera le nom de ce joueur ?");
+		String nom = sc.next();
+		System.out.println("Quel sera l'origine de ce joueur ?");
+		String origine = sc.next();
+		System.out.println("Quel sera le poste de ce joueur ?");
+		String poste = sc.next();
+		System.out.println("Quel sera le numéro de ce joueur ?");
+		int numero = sc.nextInt();
+		System.out.println("Quel sera la vitesse de ce joueur ?");
+		int vitesse = sc.nextInt();
+		System.out.println("Quel sera la frappe de ce joueur ?");
+		int frappe = sc.nextInt();
+		System.out.println("Quel sera la passe de ce joueur ?");
+		int passe = sc.nextInt();
+		System.out.println("Quel sera la défense de ce joueur ?");
+		int defense = sc.nextInt();
+		return new Joueur(prenom, nom, origine, poste, numero, vitesse, frappe, passe, defense);
 	}
 
 	private static void sauvegarde(List<Equipe> equipes) {

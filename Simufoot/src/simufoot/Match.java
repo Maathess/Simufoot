@@ -20,6 +20,7 @@ public class Match {
 		this.equipes.add(equipeLocale);
 		this.equipes.add(equipeExterieure);
 	}
+	// Possibilité : Ajouter les équipes dans une autre méthode.
 
 	public LocalDateTime getDate() {
 		return date;
