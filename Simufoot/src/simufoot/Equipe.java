@@ -18,6 +18,14 @@ public class Equipe extends ArrayList<Joueur> {
 		this.pays = pays;
 		this.ville = ville;
 	}
+	
+	public Equipe(String nom, String pays, String ville, int[] resultats, String strategie) {
+		this.nom = nom;
+		this.pays = pays;
+		this.ville = ville;
+		this.resultats = resultats;
+		this.strategie = strategie;
+	}
 
 	public void affronterEquipe(Equipe adversaire, String pays, String stade) {
 		Match match = new Match(pays, stade, LocalDateTime.now(), this, adversaire);
@@ -37,7 +45,7 @@ public class Equipe extends ArrayList<Joueur> {
 
 	public String toStringSave() {
 		return String.format("%s,%s,%s,%s,%s",
-				nom,pays,ville,Arrays.toString(resultats),strategie);
+				nom,pays,ville, resultats[0] + "," + resultats[1] + "," + resultats[2],strategie);
 	}
 	
 	@Override
