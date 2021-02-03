@@ -19,6 +19,13 @@ public class Match {
 		this.equipes.add(equipeExterieure);
 	}
 	
+	public Match(String nomStade, String paysStade, String adresseStade, LocalDateTime date, Equipe equipeLocale, Equipe equipeExterieure) {
+		this.stade = new Stade(nomStade, paysStade, adresseStade);
+		this.date = date;
+		this.equipes.add(equipeLocale);
+		this.equipes.add(equipeExterieure);
+	}
+	
 	public LocalDateTime getDate() {
 		return date;
 	}
