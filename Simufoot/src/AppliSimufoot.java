@@ -13,21 +13,6 @@ public class AppliSimufoot {
 
 	public static void main(String[] args) {
 		List<Equipe> equipes = chargement();
-/*		List<Equipe> equipes = new ArrayList<>();
-		equipes.add(new Equipe("PSG", "France", "Paris"));
-		equipes.get(0).add(new Joueur("Gérard", "Leblond", "France", "Gardien", 1, 50, 50, 50, 50));
-		equipes.get(0).add(new Joueur("Nicolas", "Lebrun", "France", "Attaquant", 2, 50, 50, 50, 50));
-		equipes.get(0).add(new Joueur("Vincent", "Leblanc", "France", "Défenseur", 3, 50, 50, 50, 50));
-		equipes.get(0).add(new Joueur("René", "Legris", "France", "Défenseur", 4, 50, 50, 50, 50));
-		equipes.get(0).add(new Joueur("Théo", "Leroux", "France", "Attaquant", 5, 50, 50, 50, 50));
-		equipes.get(0).add(new Joueur("Rachid", "Lebleu", "France", "Attaquant", 6, 50, 50, 50, 50));
-		equipes.add(new Equipe("OM", "France", "Marseille"));
-		equipes.get(1).add(new Joueur("Gérard", "Leblond", "France", "Gardien", 1, 50, 50, 50, 50));
-		equipes.get(1).add(new Joueur("Nicolas", "Lebrun", "France", "Attaquant", 2, 50, 50, 50, 50));
-		equipes.get(1).add(new Joueur("Vincent", "Leblanc", "France", "Défenseur", 3, 50, 50, 50, 50));
-		equipes.get(1).add(new Joueur("René", "Legris", "France", "Défenseur", 4, 50, 50, 50, 50));
-		equipes.get(1).add(new Joueur("Théo", "Leroux", "France", "Attaquant", 5, 50, 50, 50, 50));
-		equipes.get(1).add(new Joueur("Rachid", "Lebleu", "France", "Attaquant", 6, 50, 50, 50, 50));*/
 		sauvegarde(equipes);
 	}
 	

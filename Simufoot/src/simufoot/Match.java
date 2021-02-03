@@ -6,15 +6,13 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Match {
-	private String pays;
-	private String stade;
+	private Stade stade;
 	private LocalDateTime date;
 	private int[] score;
 	private String resultat;
 	private List<Equipe> equipes = new ArrayList<>();
 	
-	public Match(String pays, String stade, LocalDateTime date, Equipe equipeLocale, Equipe equipeExterieure) {
-		this.pays = pays;
+	public Match(Stade stade, LocalDateTime date, Equipe equipeLocale, Equipe equipeExterieure) {
 		this.stade = stade;
 		this.date = date;
 		this.equipes.add(equipeLocale);
@@ -40,7 +38,7 @@ public class Match {
 
 	@Override
 	public String toString() {
-		return String.format("Match [pays=%s, stade=%s, date=%, score=%s, résultat=%s, équipes=%s", 
-				pays,stade,date, Arrays.toString(score), resultat,equipes);
+		return String.format("Match [stade=%s, date=%, score=%s, résultat=%s, équipes=%s]", 
+				stade.toString(),date, Arrays.toString(score), resultat,equipes);
 	}
 }
