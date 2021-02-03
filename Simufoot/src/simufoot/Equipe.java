@@ -27,8 +27,8 @@ public class Equipe extends ArrayList<Joueur> {
 		this.strategie = strategie;
 	}
 
-	public void affronterEquipe(Equipe adversaire, String pays, String stade) {
-		Match match = new Match(pays, stade, LocalDateTime.now(), this, adversaire);
+	public void affronterEquipe(Equipe adversaire, String nomStade, String paysStade, String adresseStade) {
+		Match match = new Match(nomStade, paysStade, adresseStade, LocalDateTime.now(), this, adversaire);
 		match.simulerMatch();
 		matchsJoues.add(match);
 		adversaire.matchsJoues.add(match);
