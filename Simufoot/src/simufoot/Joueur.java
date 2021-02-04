@@ -51,6 +51,10 @@ public class Joueur {
 	public void modifierDefense(int defense) {
 		this.defense = defense;
 	}
+	
+	public String getPoste() {
+		return poste;
+	}
 
 	public String toStringSave() {
 		return nom + "," + prenom + "," + origine + "," + poste + "," + numero + "," + vitesse + "," + frappe + ","

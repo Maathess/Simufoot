@@ -153,7 +153,7 @@ public class Menu {
 
 	}
 
-	private static void sauvegarde(List<Equipe> equipes) {
+	public void sauvegarde(List<Equipe> equipes) {
 		try {
 			File myObj = new File("equipes.txt");
 			myObj.createNewFile();
@@ -178,7 +178,7 @@ public class Menu {
 		}
 	}
 	
-	private static List<Equipe> chargement() {
+	public List<Equipe> chargement() {
 		List<Equipe> equipes = new ArrayList<>();
 		Equipe equipe = null;
 		try {
