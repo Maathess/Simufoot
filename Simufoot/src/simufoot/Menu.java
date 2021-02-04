@@ -1,26 +1,22 @@
 package simufoot;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-
 
 public class Menu {
 
 	private static final String MENU_PRINCIPAL = "menuprincipal.txt";
 	private static final String MENU_TOURNOI = "menutournoi.txt";
-	private static final String MENU_CREATIONJOUEUR = "menuprincipal.txt";
-	private static final String MENU_QUITTER = "menuquitter.txt";
 
 	private List<Equipe> equipes;
-
-	public Menu(List<Equipe> equipes) {
-		this.equipes = equipes;
-	}
 
 	private void lireMenu(String nomFichier) throws IOException {
 		BufferedReader bf = null;
@@ -130,13 +126,21 @@ public class Menu {
 							System.out.println("Veux-tu ajouter d'autres joueurs ? \n\t 1 - OUI \n\t 2 - NON");
 							choixAjoutJoueurs = sc.nextInt();
 						}
-
 					}
+					else {
+						System.out.println("Maintenant que les joueurs ont été créés, tu peux commencer à jouer.");
+					}
+
 				}
 			} else if (choixPrincipal == 2) {
-				System.out.println("L'équipe a été sauvegardé");
+				System.out.println("La partie a été sauvegardé");
 				sauvegarde(equipes);
-			} else if (choixPrincipal == 4) {
+			} else if (choixPrincipal == 3) {
+				this.equipes = chargement();
+				System.out.println("La partie a été chargé");
+			}
+
+			else if (choixPrincipal == 4) {
 				System.out.println();
 				quitterPartie();
 			} else {
@@ -144,15 +148,64 @@ public class Menu {
 			}
 
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 
 	}
 
-	private void sauvegarde(List<Equipe> equipes2) {
-		// TODO Auto-generated method stub
-		
+	private static void sauvegarde(List<Equipe> equipes) {
+		try {
+			File myObj = new File("equipes.txt");
+			myObj.createNewFile();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+		try {
+			String contenuSauvegarde = "";
+			for (Equipe equipe : equipes) {
+				contenuSauvegarde = contenuSauvegarde + "Equipe : " + equipe.toStringSave() + "\n";
+				for (Joueur joueur : equipe) {
+					contenuSauvegarde = contenuSauvegarde + "Joueur : " + joueur.toStringSave() + "\n";
+				}
+			}
+			FileWriter myWriter = new FileWriter("equipes.txt");
+			myWriter.write(contenuSauvegarde);
+			myWriter.close();
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+	}
+	
+	private static List<Equipe> chargement() {
+		List<Equipe> equipes = new ArrayList<>();
+		Equipe equipe = null;
+		try {
+			File fichierEquipes = new File("equipes.txt");
+			Scanner reader = new Scanner(fichierEquipes);
+			while (reader.hasNextLine()) {
+				String line = reader.nextLine();
+				if (line.equals("Equipe :")) {
+					String[] datas = reader.nextLine().split(",");
+					int[] resultats = { Integer.parseInt(datas[3]), Integer.parseInt(datas[4]),
+							Integer.parseInt(datas[5]) };
+					equipe = new Equipe(datas[0], datas[1], datas[2], resultats, datas[6]);
+					equipes.add(equipe);
+				}
+				if (line.equals("Joueur :")) {
+					String[] datas = reader.nextLine().split(",");
+					equipe.add(new Joueur(datas[0], datas[1], datas[2], datas[3], Integer.parseInt(datas[4]),
+							Integer.parseInt(datas[5]), Integer.parseInt(datas[6]), Integer.parseInt(datas[7]),
+							Integer.parseInt(datas[8])));
+				}
+			}
+			reader.close();
+		} catch (FileNotFoundException error) {
+			System.out.println("An error occurred.");
+			error.printStackTrace();
+		}
+		return equipes;
 	}
 
 }
