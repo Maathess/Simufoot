@@ -1,0 +1,28 @@
+Equipe :
+PSG,France,Paris,0,0,0,Neutre
+Joueur :
+Gérard,Leblond,France,Gardien,1,50,50,50,50
+Joueur :
+Nicolas,Lebrun,France,Attaquant,2,50,50,50,50
+Joueur :
+Vincent,Leblanc,France,Défenseur,3,50,50,50,50
+Joueur :
+René,Legris,France,Défenseur,4,50,50,50,50
+Joueur :
+Théo,Leroux,France,Attaquant,5,50,50,50,50
+Joueur :
+Rachid,Lebleu,France,Attaquant,6,50,50,50,50
+Equipe :
+OM,France,Marseille,0,0,0,Neutre
+Joueur :
+Gérard,Leblond,France,Gardien,1,50,50,50,50
+Joueur :
+Nicolas,Lebrun,France,Attaquant,2,50,50,50,50
+Joueur :
+Vincent,Leblanc,France,Défenseur,3,50,50,50,50
+Joueur :
+René,Legris,France,Défenseur,4,50,50,50,50
+Joueur :
+Théo,Leroux,France,Attaquant,5,50,50,50,50
+Joueur :
+Rachid,Lebleu,France,Attaquant,6,50,50,50,50
