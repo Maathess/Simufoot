@@ -9,6 +9,9 @@ import simufoot.Stade;
 public class AppliSimufoot {
 	public static void main(String[] args) {
 		Menu m = new Menu();
+		// m.chargerMenu();
+
+		
 		List<Equipe> equipes = m.chargement();
 		m.sauvegarde(equipes);
 		LocalDateTime date = LocalDateTime.now();
@@ -18,7 +21,7 @@ public class AppliSimufoot {
 		Match match = new Match(stade, date, local, ext);
 		match.simulerMatch();
 		System.out.print(match);
-
+		
 	}
 
 }

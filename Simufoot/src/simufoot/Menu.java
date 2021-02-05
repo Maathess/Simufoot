@@ -13,11 +13,17 @@ import java.util.Scanner;
 
 public class Menu {
 
+	private static final String PATH_EQUIPES = "equipes.txt";
 	private static final String MENU_PRINCIPAL = "menuprincipal.txt";
 	private static final String MENU_TOURNOI = "menutournoi.txt";
 
 	private List<Equipe> equipes;
-
+	private Scanner sc;
+	
+	public Menu() {
+		this.equipes = new ArrayList<>();
+		this.sc = new Scanner(System.in);
+	}
 	private void lireMenu(String nomFichier) throws IOException {
 		BufferedReader bf = null;
 		try {
@@ -35,7 +41,7 @@ public class Menu {
 		}
 	}
 
-	public Joueur creerJoueur(Scanner sc) {
+	public Joueur creerJoueur() {
 		System.out.println("Quel sera le prénom de ce joueur ?");
 		String prenom = sc.next();
 
@@ -66,7 +72,7 @@ public class Menu {
 		return new Joueur(prenom, nom, origine, poste, numero, vitesse, frappe, passe, defense);
 	}
 
-	private Equipe creerEquipe(Scanner sc) {
+	private Equipe creerEquipe() {
 		System.out.println("Quel nom vas-tu donner à cette équipe ?");
 		String nomEquipe = sc.next();
 		System.out.println("Cette équipe vient de quel pays?");
@@ -100,7 +106,7 @@ public class Menu {
 		System.exit(0);
 	}
 
-	public void chargerMenu(Scanner sc) {
+	public void chargerMenu() {
 		try {
 			lireMenu(MENU_PRINCIPAL);
 			int choixPrincipal = sc.nextInt();
@@ -114,21 +120,22 @@ public class Menu {
 					numChoixEquipe = sc.nextInt();
 					afficherChoixEquipe(numChoixEquipe);
 				} else if (choixTournoi == 2) {
-					equipes.add(creerEquipe(sc));
+					equipes.add(creerEquipe());
 					System.out.println("Maintenant que l'équipe " + equipes.get(equipes.size() - 1).toString()
 							+ "a été créé, il faut lui ajouter des joueurs.");
-					creerJoueur(sc);
+					creerJoueur();
 					if (equipes.get(numChoixEquipe).size() < 11) {
 						System.out.println("Il n'y a pas assez de joueurs, veux-tu en ajouter ? \n 1 - OUI \n 2 - NON");
 						int choixAjoutJoueurs = sc.nextInt();
 						while (choixAjoutJoueurs != 2) {
-							creerJoueur(sc);
+							creerJoueur();
 							System.out.println("Veux-tu ajouter d'autres joueurs ? \n\t 1 - OUI \n\t 2 - NON");
 							choixAjoutJoueurs = sc.nextInt();
 						}
 					}
 					else {
 						System.out.println("Maintenant que les joueurs ont été créés, tu peux commencer à jouer.");
+						
 					}
 
 				}
@@ -155,7 +162,7 @@ public class Menu {
 
 	public void sauvegarde(List<Equipe> equipes) {
 		try {
-			File myObj = new File("equipes.txt");
+			File myObj = new File(PATH_EQUIPES);
 			myObj.createNewFile();
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
@@ -169,7 +176,7 @@ public class Menu {
 					contenuSauvegarde = contenuSauvegarde + "Joueur : " + joueur.toStringSave() + "\n";
 				}
 			}
-			FileWriter myWriter = new FileWriter("equipes.txt");
+			FileWriter myWriter = new FileWriter(PATH_EQUIPES);
 			myWriter.write(contenuSauvegarde);
 			myWriter.close();
 		} catch (IOException e) {
@@ -179,10 +186,9 @@ public class Menu {
 	}
 	
 	public List<Equipe> chargement() {
-		List<Equipe> equipes = new ArrayList<>();
 		Equipe equipe = null;
 		try {
-			File fichierEquipes = new File("equipes.txt");
+			File fichierEquipes = new File(PATH_EQUIPES);
 			Scanner reader = new Scanner(fichierEquipes);
 			while (reader.hasNextLine()) {
 				String line = reader.nextLine();
