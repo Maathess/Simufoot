@@ -34,6 +34,10 @@ public class Joueur {
 	public int getScore() {
 		return (vitesse + frappe + passe + defense) / 4;
 	}
+	
+	public String getPoste() {
+		return poste;
+	}
 
 	public void modifierVitesse(int vitesse) {
 		this.vitesse = vitesse;

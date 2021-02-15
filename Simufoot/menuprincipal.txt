@@ -1,0 +1,3 @@
+									MENU PRINCIPAL
+	1 - Accéder au tournoi
+	2 - Quitter le jeu

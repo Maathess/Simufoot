@@ -1,0 +1,3 @@
+									MENU EQUIPE
+	1 - Affronter une autre équipe
+	2 - Retour au menu principal

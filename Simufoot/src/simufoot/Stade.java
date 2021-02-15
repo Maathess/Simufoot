@@ -13,7 +13,6 @@ public class Stade {
 
 	@Override
 	public String toString() {
-		return String.format("Stade [nom=%s, pays=%s, adresse=%s]", 
-				nom,pays,adresse);
+		return "Stade [nom=" + nom + ", pays=" + pays + ", adresse=" + adresse + "]";
 	}
 }

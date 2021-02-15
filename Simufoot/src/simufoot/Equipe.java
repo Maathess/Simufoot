@@ -1,6 +1,6 @@
 package simufoot;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,11 +26,39 @@ public class Equipe extends ArrayList<Joueur> {
 		this.resultats = resultats;
 		this.strategie = strategie;
 	}
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public int getScore() {
+		int score = 0;
+		for(Joueur joueur : this) {
+			score = score + joueur.getScore();
+		}
+		return score / this.size();
+	}
+	
+	public Match getLastMatchJoue() {
+		return this.matchsJoues.get(this.matchsJoues.size() - 1);
+	}
+	
+	public void addVictoire() {
+		this.resultats[0] = this.resultats[0] + 1;
+	}
+	
+	public void addEgalite() {
+		this.resultats[1] = this.resultats[1] + 1;
+	}
+	
+	public void addDefaite() {
+		this.resultats[2] = this.resultats[2] + 1;
+	}
 
 	public void affronterEquipe(Equipe adversaire, String nomStade, String paysStade, String adresseStade) {
-		Match match = new Match(nomStade, paysStade, adresseStade, LocalDateTime.now(), this, adversaire);
+		Match match = new Match(nomStade, paysStade, adresseStade, LocalDate.now(), this, adversaire);
 		match.simulerMatch();
-		matchsJoues.add(match);
+		this.matchsJoues.add(match);
 		adversaire.matchsJoues.add(match);
 	}
 
@@ -50,7 +78,7 @@ public class Equipe extends ArrayList<Joueur> {
 	
 	@Override
 	public String toString() {
-		return String.format("Equipe [nom=%s, pays=%s, ville=%s, resultats=%s, stratégie=%s, matchsJoues=%s]",
-				nom,pays,ville,Arrays.toString(resultats),strategie,matchsJoues);
+		return "Equipe [nom=" + nom + ", pays=" + pays + ", ville=" + ville + ", resultats="
+				+ Arrays.toString(resultats) + ", strategie=" + strategie + "]";
 	}
 }
