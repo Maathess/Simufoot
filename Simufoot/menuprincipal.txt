@@ -1,3 +1,3 @@
 									MENU PRINCIPAL
-	1 - Accéder au tournoi
+	1 - Accéder au menu simulation
 	2 - Quitter le jeu

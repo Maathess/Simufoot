@@ -55,7 +55,6 @@ public class Menu {
 			choix = scannerChoixMenu(MENU_SIMULATION);
 			if (choix == 1) {
 				equipe = scannerEquipe();
-				System.out.println("Tu joueras avec : " + equipe + ".");
 				chargerMenuEquipe(equipe);
 			} else if (choix == 2) {
 				creationEquipe();
@@ -87,12 +86,9 @@ public class Menu {
 	}
 	
 	private Equipe creerEquipe() {
-		System.out.println("Quel nom vas-tu donner à cette équipe?");
-		String nomEquipe = scanner.nextLine();
-		System.out.println("De quel pays vient cette équipe?");
-		String paysEquipe = scanner.nextLine();
-		System.out.println("De quelle ville vient cette équipe?");
-		String villeEquipe = scanner.nextLine();
+		String nomEquipe = scannerString("Quel nom vas-tu donner à cette équipe?");
+		String paysEquipe = scannerString("De quel pays vient cette équipe?");
+		String villeEquipe = scannerString("De quelle ville vient cette équipe?");
 		return new Equipe(nomEquipe, paysEquipe, villeEquipe);
 	}
 	
@@ -100,6 +96,7 @@ public class Menu {
 		int choix = 0;
 			
 		while (choix < 1 || choix > 6) {
+			System.out.println(equipe);
 			choix = scannerChoixMenu(MENU_EQUIPE);
 			if (choix == 1) {
 				choixAdversaire(equipe);
@@ -140,6 +137,10 @@ public class Menu {
 	}
 
 	private void modifierEquipe(Equipe equipe) {
+		equipe.setNom(scannerString("Quel nouveau nom vas-tu donner à cette équipe?\nNom actuel : " + equipe.getNom()));
+		equipe.setPays(scannerString("De quel pays vient cette équipe?\nPays actuel : " + equipe.getPays()));
+		equipe.setVille(scannerString("De quelle ville vient cette équipe?\nPays actuel : " + equipe.getVille()));
+		equipe.setStrategie(scannerString("Quelle sera la nouvelle stratégie de cette équipe?\nStratégie actuel : " + equipe.getStrategie()));
 		chargerMenuEquipe(equipe);
 	}
 
@@ -167,7 +168,6 @@ public class Menu {
 			choix = scannerChoixMenu(MENU_JOUEURS);
 			if (choix == 1) {
 				ajouterJoueur(equipe);
-				chargerMenuJoueurs(equipe);
 			} else if (choix == 2) {
 				modifierJoueur(equipe);
 			} else if (choix == 3) {
@@ -188,10 +188,43 @@ public class Menu {
 	private void ajouterJoueur(Equipe equipe) {
 		equipe.add(creerJoueur());
 		System.out.println("Joueur créé et ajouté à l'équipe.");
+		chargerMenuJoueurs(equipe);
 	}
 	
 	private void modifierJoueur(Equipe equipe) {
-		chargerMenuJoueurs(equipe);
+		int choix = 0;
+		Joueur joueur;
+		
+		if (equipe.size() != 0) {
+			joueur = scannerJoueur(equipe);
+			while (choix < 1 || choix > 2) {
+				System.out.println("Êtes-vous sûr de vouloir modifier ce joueur?\n" + joueur.toString() + "\n1 - OUI \n2 - NON");
+				choix = scannerNumerique();
+				if (choix == 1) {
+					joueurModifie(joueur);
+					chargerMenuJoueurs(equipe);
+				} else if (choix == 2) {
+					chargerMenuJoueurs(equipe);
+				} else {
+					System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
+				}
+			}
+		} else {
+			System.out.println("Il n'y a pas de joueur dans cette équipe veuillez en créer un d'abord!");
+			chargerMenuJoueurs(equipe);
+		}
+	}
+	
+	private void joueurModifie(Joueur joueur) {
+		joueur.setPrenom(scannerString("Quel sera le nouveau prénom de ce joueur?\nPrénom actuel : " + joueur.getPrenom()));
+		joueur.setNom(scannerString("Quel sera le nouveau nom de ce joueur?\nNom actuel : " + joueur.getNom()));
+		joueur.setOrigine(scannerString("Quelle sera la nouvelle origine de ce joueur?\nOrigine actuelle : " + joueur.getOrigine()));
+		joueur.setPoste(scannerString("Quel sera le nouveau  poste de ce joueur?\nPoste actuel : " + joueur.getPoste()));
+		joueur.setNumero(scannerStatistiqueNumerique("Quel sera le nouveau  numéro de ce joueur?\nNuméro actuel : " + joueur.getNumero()));
+		joueur.setVitesse(scannerStatistiqueNumerique("Quelle sera la nouvelle vitesse de ce joueur?\nVitesse actuelle : " + joueur.getVitesse()));
+		joueur.setFrappe(scannerStatistiqueNumerique("Quelle sera la nouvelle frappe de ce joueur?\nFrappe actuelle : " + joueur.getFrappe()));
+		joueur.setPasse(scannerStatistiqueNumerique("Quelle sera la nouvelle passe de ce joueur?\nPasse actuelle : " + joueur.getPasse()));
+		joueur.setDefense(scannerStatistiqueNumerique("Quelle sera la nouvelle défense de ce joueur?\nDefense actuel : " + joueur.getDefense()));
 	}
 
 	private void supprimerJoueur(Equipe equipe) {
@@ -206,7 +239,7 @@ public class Menu {
 				if (choix == 1) {
 					equipe.remove(joueur);
 					chargerMenuJoueurs(equipe);
-				} else if (choix == 2){
+				} else if (choix == 2) {
 					chargerMenuJoueurs(equipe);
 				} else {
 					System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
@@ -219,19 +252,15 @@ public class Menu {
 	}
 	
 	public Joueur creerJoueur() {
-		System.out.println("Quel sera le prénom de ce joueur?");
-		String prenom = scanner.nextLine();
-		System.out.println("Quel sera le nom de ce joueur?");
-		String nom = scanner.nextLine();
-		System.out.println("Quel sera l'origine de ce joueur?");
-		String origine = scanner.nextLine();
-		System.out.println("Quel sera le poste de ce joueur?");
-		String poste = scanner.nextLine();
-		int numero = scannerStatistique("Quel sera le numéro de ce joueur?");
-		int vitesse = scannerStatistique("Quelle sera la vitesse de ce joueur?");
-		int frappe = scannerStatistique("Quelle sera la frappe de ce joueur?");
-		int passe = scannerStatistique("Quelle sera la passe de ce joueur?");
-		int defense = scannerStatistique("Quelle sera la défense de ce joueur?");
+		String prenom = scannerString("Quel sera le prénom de ce joueur?");
+		String nom = scannerString("Quel sera le nom de ce joueur?");
+		String origine = scannerString("Quelle sera l'origine de ce joueur?");
+		String poste = scannerString("Quel sera le poste de ce joueur?");
+		int numero = scannerStatistiqueNumerique("Quel sera le numéro de ce joueur?");
+		int vitesse = scannerStatistiqueNumerique("Quelle sera la vitesse de ce joueur?");
+		int frappe = scannerStatistiqueNumerique("Quelle sera la frappe de ce joueur?");
+		int passe = scannerStatistiqueNumerique("Quelle sera la passe de ce joueur?");
+		int defense = scannerStatistiqueNumerique("Quelle sera la défense de ce joueur?");
 		return new Joueur(prenom, nom, origine, poste, numero, vitesse, frappe, passe, defense);
 	}
 	
@@ -252,7 +281,7 @@ public class Menu {
 		}
 	}
 	
-	private int scannerStatistique(String questionStatistique) {
+	private int scannerStatistiqueNumerique(String questionStatistique) {
 		int choix = 0;
 		
 		while (choix < 1 || choix > 100) {
@@ -260,6 +289,11 @@ public class Menu {
 			choix = scannerNumerique();
 		}
 		return choix;
+	}
+	
+	private String scannerString(String question) {
+		System.out.println(question);
+		return scanner.nextLine();
 	}
 	
 	private int scannerChoixMenu(String menu) {

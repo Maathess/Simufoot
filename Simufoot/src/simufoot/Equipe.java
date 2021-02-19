@@ -26,10 +26,6 @@ public class Equipe extends ArrayList<Joueur> {
 		this.resultats = resultats;
 		this.strategie = strategie;
 	}
-	
-	public String getNom() {
-		return nom;
-	}
 
 	public int getScore() {
 		int score = 0;
@@ -37,6 +33,38 @@ public class Equipe extends ArrayList<Joueur> {
 			score = score + joueur.getScore();
 		}
 		return score / this.size();
+	}
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public String getPays() {
+		return pays;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public String getStrategie() {
+		return strategie;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
+
+	public void setStrategie(String strategie) {
+		this.strategie = strategie;
 	}
 	
 	public Match getLastMatchJoue() {
