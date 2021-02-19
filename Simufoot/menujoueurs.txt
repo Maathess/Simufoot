@@ -1,0 +1,7 @@
+									MENU JOUEURS
+	1 - Ajouter joueur
+	2 - Modifier joueur
+	3 - Supprimer joueur
+	4 - Lister joueurs
+	5 - Retour au menu équipe
+	6 - Retour au menu principal

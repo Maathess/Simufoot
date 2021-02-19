@@ -14,8 +14,9 @@ import java.util.Scanner;
 public class Menu {
 	private static final String PATH_EQUIPES = "equipes.txt";
 	private static final String MENU_PRINCIPAL = "menuprincipal.txt";
-	private static final String MENU_TOURNOI = "menutournoi.txt";
+	private static final String MENU_SIMULATION = "menusimulation.txt";
 	private static final String MENU_EQUIPE = "menuequipe.txt";
+	private static final String MENU_JOUEURS = "menujoueurs.txt";
 
 	private List<Equipe> equipes;
 	private Scanner scanner;
@@ -26,98 +27,110 @@ public class Menu {
 	}
 	
 	public void chargerMenuPrincipal() {
-		try {
-			String choixPrincipal = "";
+		int choix = 0;
 
-			while (choixPrincipal != "1" || choixPrincipal != "2") {
-				lireMenu(MENU_PRINCIPAL);
-				choixPrincipal = scanner.next();
-				if (choixPrincipal.matches("1")) {
-					chargerMenuTournoi();
-				} else if (choixPrincipal.matches("2")) {
-					quitterPartie();
-				} else {
-					System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
-				}
+		while (choix < 1 || choix > 2) {
+			choix = scannerChoixMenu(MENU_PRINCIPAL);
+			if (choix == 1) {
+				chargerMenuSimulation();
+			} else if (choix == 2) {
+				quitterPartie();
+			} else {
+				System.out.println("Le numéro choisi ne fait pas partie des choix possibles!");
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
+	
+	private void quitterPartie() {
+		System.out.println("A bientôt sur Simufoot");
+		this.sauvegarde(equipes);
+		System.exit(0);
+	}
 
-	private void chargerMenuTournoi() {
-		try {
-			int numChoixEquipe = 0;
+	private void chargerMenuSimulation() {
+		int choix = 0;
+		Equipe equipe;
 
-			lireMenu(MENU_TOURNOI);
-			String choixMenuTournoi = scanner.next();
-			if (choixMenuTournoi.matches("1")) {
-				listeEquipesTournoi();
-				numChoixEquipe = scanner.nextInt();
-				System.out.println("Tu joueras avec : " + equipes.get(numChoixEquipe - 1) + " durant l'intégralité du tournoi.");
-				chargerMenuEquipe(equipes.get(numChoixEquipe - 1));
-			} else if (choixMenuTournoi.matches("2")) {
-				equipes.add(creerEquipe());
-				System.out.println("Maintenant que l'équipe " + equipes.get(equipes.size() - 1).toString()
-						+ "a été créé, il faut lui ajouter des joueurs.");
-				creerJoueur();
-				if (equipes.get(numChoixEquipe).size() < 11) {
-					System.out.println("Il n'y a pas assez de joueurs, veux-tu en ajouter ? \n 1 - OUI \n 2 - NON");
-					int choixAjoutJoueurs = scanner.nextInt();
-					while (choixAjoutJoueurs != 2) {
-						creerJoueur();
-						System.out.println("Veux-tu ajouter d'autres joueurs ? \n\t 1 - OUI \n\t 2 - NON");
-						choixAjoutJoueurs = scanner.nextInt();
-					}
-				}
-				else {
-					System.out.println("Maintenant que les joueurs ont été créés, tu peux commencer à jouer.");
-				}
-			} else if (choixMenuTournoi.matches("3")) {
+		while (choix < 1 || choix > 3) {
+			choix = scannerChoixMenu(MENU_SIMULATION);
+			if (choix == 1) {
+				equipe = scannerEquipe();
+				System.out.println("Tu joueras avec : " + equipe + ".");
+				chargerMenuEquipe(equipe);
+			} else if (choix == 2) {
+				creationEquipe();
+				chargerMenuSimulation();
+			} else if (choix == 3) {
 				chargerMenuPrincipal();
 			} else {
 				System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
-	private void chargerMenuEquipe(Equipe equipe) {
-		try {
-			String choixPrincipal = "";
-			
-			while (choixPrincipal != "1" || choixPrincipal != "2") {
-				lireMenu(MENU_EQUIPE);
-				choixPrincipal = scanner.next();
-				if (choixPrincipal.matches("1")) {
-					choixAdversaire(equipe);
-				} else if (choixPrincipal.matches("2")) {
-					chargerMenuPrincipal();
-				} else {
-					System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
-				}
+	private void creationEquipe() {
+		int choix = 0;
+		Equipe equipe = creerEquipe();
+		equipes.add(equipe);
+		System.out.println("Maintenant que l'équipe " + equipe.toString() + "a été créé, il faut lui ajouter des joueurs.");
+		ajouterJoueur(equipe);
+		while (equipe.size() < 11 && choix != 2) {
+			System.out.println("Il n'y a pas assez de joueurs, veux-tu en ajouter ? \n 1 - OUI \n 2 - NON");
+			choix = scannerNumerique();
+			while (choix != 2) {
+				ajouterJoueur(equipe);
+				System.out.println("Veux-tu ajouter d'autres joueurs ? \n\t 1 - OUI \n\t 2 - NON");
+				choix = scannerNumerique();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		}
+		System.out.println("L'équipe a été ajoutée avec succès.");
+	}
+	
+	private Equipe creerEquipe() {
+		System.out.println("Quel nom vas-tu donner à cette équipe?");
+		String nomEquipe = scanner.nextLine();
+		System.out.println("De quel pays vient cette équipe?");
+		String paysEquipe = scanner.nextLine();
+		System.out.println("De quelle ville vient cette équipe?");
+		String villeEquipe = scanner.nextLine();
+		return new Equipe(nomEquipe, paysEquipe, villeEquipe);
+	}
+	
+	private void chargerMenuEquipe(Equipe equipe) {
+		int choix = 0;
+			
+		while (choix < 1 || choix > 6) {
+			choix = scannerChoixMenu(MENU_EQUIPE);
+			if (choix == 1) {
+				choixAdversaire(equipe);
+			} else if (choix == 2) {
+				chargerMenuJoueurs(equipe);
+			} else if (choix == 3) {
+				modifierEquipe(equipe);
+			} else if (choix == 4) {
+				supprimerEquipe(equipe);
+			} else if (choix == 5) {
+				chargerMenuSimulation();
+			} else if (choix == 6) {
+				chargerMenuPrincipal();
+			} else {
+				System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
+			}
 		}
 	}
-
+	
 	private void choixAdversaire(Equipe equipe) {
-		int numChoixEquipe = 0;
 		Equipe equipeAdverse = equipe;
 
 		if (equipes.size() != 1) {
 			while (equipeAdverse.equals(equipe)) {
-				listeEquipesTournoi();
-				numChoixEquipe = scanner.nextInt();
-				equipeAdverse = equipes.get(numChoixEquipe - 1);
+				equipeAdverse = scannerEquipe();
 				if (!equipeAdverse.equals(equipe)) {
 					equipe.affronterEquipe(equipeAdverse, "nomStade", "paysStade", "adresseStade");
 					System.out.println(equipe.getLastMatchJoue().toStringResultats());
 					chargerMenuEquipe(equipe);
 				} else {
-					System.out.println("Ton équipe ne peut pas s'affronter elle même.");
+					System.out.println("Ton équipe ne peut pas s'affronter elle même!");
 				}
 			}
 		} else {
@@ -125,50 +138,100 @@ public class Menu {
 			chargerMenuPrincipal();
 		}
 	}
-	
-	private void listeEquipesTournoi() {
-		int i = 1;
 
-		if (!equipes.isEmpty()) {
-			System.out.println("Quelle équipe choisis-tu?");
-			for (Equipe equipe : equipes) {
-				System.out.println(i + " : " + equipe);
-				i = i + 1;
-			}
-		} else {
-			System.out.println("Il n'y a pas encore d'équipes qui ont été créés pour ce tournoi.");
-		}
+	private void modifierEquipe(Equipe equipe) {
+		chargerMenuEquipe(equipe);
 	}
 
-	private Equipe creerEquipe() {
-		System.out.println("Quel nom vas-tu donner à cette équipe?");
-		String nomEquipe = scanner.next();
-		System.out.println("Cette équipe vient de quel pays?");
-		String paysEquipe = scanner.next();
-		System.out.println("De quelle ville vient cette équipe?");
-		String villeEquipe = scanner.next();
-		return new Equipe(nomEquipe, paysEquipe, villeEquipe);
+	private void supprimerEquipe(Equipe equipe) {
+		int choix = 0;
+		while (choix < 1 || choix > 2) {
+			System.out.println("Êtes-vous sûr de vouloir supprimer cette équipe?\n" + equipe.toString() + "\n1 - OUI \n2 - NON");
+			choix = scannerNumerique();
+			if (choix == 1) {
+				equipes.remove(equipe);
+				chargerMenuSimulation();
+			} else if (choix == 2){
+				chargerMenuEquipe(equipe);
+			} else {
+				System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
+			}
+		}
+		chargerMenuEquipe(equipe);
+	}
+
+	private void chargerMenuJoueurs(Equipe equipe) {
+		int choix = 0;
+			
+		while (choix < 1 || choix > 5) {
+			choix = scannerChoixMenu(MENU_JOUEURS);
+			if (choix == 1) {
+				ajouterJoueur(equipe);
+				chargerMenuJoueurs(equipe);
+			} else if (choix == 2) {
+				modifierJoueur(equipe);
+			} else if (choix == 3) {
+				supprimerJoueur(equipe);
+			} else if (choix == 4) {
+				listeJoueurs(equipe);
+				chargerMenuJoueurs(equipe);
+			} else if (choix == 5) {
+				chargerMenuEquipe(equipe);
+			} else if (choix == 6) {
+				chargerMenuPrincipal();
+			} else {
+				System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
+			}
+		}
+	}
+	
+	private void ajouterJoueur(Equipe equipe) {
+		equipe.add(creerJoueur());
+		System.out.println("Joueur créé et ajouté à l'équipe.");
+	}
+	
+	private void modifierJoueur(Equipe equipe) {
+		chargerMenuJoueurs(equipe);
+	}
+
+	private void supprimerJoueur(Equipe equipe) {
+		int choix = 0;
+		Joueur joueur;
+		
+		if (equipe.size() != 0) {
+			joueur = scannerJoueur(equipe);
+			while (choix < 1 || choix > 2) {
+				System.out.println("Êtes-vous sûr de vouloir supprimer ce joueur?\n" + joueur.toString() + "\n1 - OUI \n2 - NON");
+				choix = scannerNumerique();
+				if (choix == 1) {
+					equipe.remove(joueur);
+					chargerMenuJoueurs(equipe);
+				} else if (choix == 2){
+					chargerMenuJoueurs(equipe);
+				} else {
+					System.out.println("Le numéro choisi ne fait pas partie des choix possibles");
+				}
+			}
+		} else {
+			System.out.println("Il n'y a pas de joueur dans cette équipe veuillez en créer un d'abord!");
+			chargerMenuJoueurs(equipe);
+		}
 	}
 	
 	public Joueur creerJoueur() {
 		System.out.println("Quel sera le prénom de ce joueur?");
-		String prenom = scanner.next();
+		String prenom = scanner.nextLine();
 		System.out.println("Quel sera le nom de ce joueur?");
-		String nom = scanner.next();
+		String nom = scanner.nextLine();
 		System.out.println("Quel sera l'origine de ce joueur?");
-		String origine = scanner.next();
+		String origine = scanner.nextLine();
 		System.out.println("Quel sera le poste de ce joueur?");
-		String poste = scanner.next();
-		System.out.println("Quel sera le numéro de ce joueur?");
-		int numero = scanner.nextInt();
-		System.out.println("Quelle sera la vitesse de ce joueur?");
-		int vitesse = scanner.nextInt();
-		System.out.println("Quelle sera la frappe de ce joueur?");
-		int frappe = scanner.nextInt();
-		System.out.println("Quelle sera la passe de ce joueur?");
-		int passe = scanner.nextInt();
-		System.out.println("Quelle sera la défense de ce joueur?");
-		int defense = scanner.nextInt();
+		String poste = scanner.nextLine();
+		int numero = scannerStatistique("Quel sera le numéro de ce joueur?");
+		int vitesse = scannerStatistique("Quelle sera la vitesse de ce joueur?");
+		int frappe = scannerStatistique("Quelle sera la frappe de ce joueur?");
+		int passe = scannerStatistique("Quelle sera la passe de ce joueur?");
+		int defense = scannerStatistique("Quelle sera la défense de ce joueur?");
 		return new Joueur(prenom, nom, origine, poste, numero, vitesse, frappe, passe, defense);
 	}
 	
@@ -189,11 +252,107 @@ public class Menu {
 		}
 	}
 	
-	private void quitterPartie() {
-		System.out.println("A bientôt sur Simufoot");
-		System.exit(0);
+	private int scannerStatistique(String questionStatistique) {
+		int choix = 0;
+		
+		while (choix < 1 || choix > 100) {
+			System.out.println(questionStatistique);
+			choix = scannerNumerique();
+		}
+		return choix;
 	}
+	
+	private int scannerChoixMenu(String menu) {
+		int choix = 0;
+		
+		try {
+			lireMenu(menu);
+			choix = scannerNumerique();
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(0);
+		}
+		return choix;
+	}
+	
+	private Equipe scannerEquipe() {
+		int choix = 0;
 
+		while (choix < 1 || choix > equipes.size()) {
+			listeEquipes();
+			choix = scannerNumerique();
+			if (choix < 1 || choix > equipes.size()) {
+				System.out.println("Ce choix ne correspond à aucune équipe!");
+			}
+		}
+		return equipes.get(choix - 1);
+	}
+	
+	private Joueur scannerJoueur(Equipe equipe) {
+		int choix = 0;
+
+		while (choix < 1 || choix > equipe.size()) {
+			System.out.println("Quel joueur choisis-tu?");
+			listeJoueurs(equipe);
+			choix = scannerNumerique();
+			if (choix < 1 || choix > equipe.size()) {
+				System.out.println("Ce choix ne correspond à aucun joueur!");
+			}
+		}
+		return equipe.get(choix - 1);
+	}
+	
+	private int scannerNumerique() {
+		String choix = "";
+		int numChoix = 0;
+		
+		while (!this.isNumeric(choix)) {
+			choix = scanner.nextLine();
+			if (!this.isNumeric(choix)) {
+				System.out.println("Ce choix n'est pas un nombre!");
+			} else {
+				numChoix = Integer.parseInt(choix);
+			}
+		}
+		return numChoix;
+	}
+	
+	private void listeEquipes() {
+		int i = 1;
+
+		if (!equipes.isEmpty()) {
+			System.out.println("Quelle équipe choisis-tu?");
+			for (Equipe equipe : equipes) {
+				System.out.println(i + " : " + equipe);
+				i = i + 1;
+			}
+		} else {
+			System.out.println("Il n'y a d'équipe veuillez en créer une d'abord!");
+		}
+	}
+	
+	private void listeJoueurs(Equipe equipe) {
+		int i = 1;
+
+		if (!equipe.isEmpty()) {
+			for (Joueur joueur : equipe) {
+				System.out.println(i + " : " + joueur);
+				i = i + 1;
+			}
+		} else {
+			System.out.println("Il n'y a pas de joueur dans cette équipe veuillez en créer un d'abord!");
+		}
+	}
+	
+	private boolean isNumeric(String str) { 
+		try {  
+			Double.parseDouble(str);  
+			return true;
+		} catch (NumberFormatException e) {  
+			return false;  
+		}  
+	}
+	
 	public void sauvegarde(List<Equipe> equipes) {
 		try {
 			File fichierEquipes = new File(PATH_EQUIPES);

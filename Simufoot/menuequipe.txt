@@ -1,3 +1,7 @@
 									MENU EQUIPE
 	1 - Affronter une autre équipe
-	2 - Retour au menu principal
+	2 - Gérer les joueurs
+	3 - Modifier l'équipe
+	4 - Supprimer l'équipe
+	5 - Retour au menu simulation
+	6 - Retour au menu principal

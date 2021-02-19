@@ -1,4 +1,4 @@
-						MENU TOURNOI
+						MENU SIMULATION
 	1 - Choisir une équipe
 	2 - Créer une équipe
 	3 - Retour au menu principal
