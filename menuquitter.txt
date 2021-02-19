@@ -1,3 +1,0 @@
-Es-tu sur de vouloir quitter Simufoot ?
-	1 - OUI 
-	2 - NON

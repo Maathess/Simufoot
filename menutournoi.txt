@@ -1,3 +1,0 @@
-						MENU TOURNOI
-	1 - Choisir une équipe
-	2 - Créer une équipe

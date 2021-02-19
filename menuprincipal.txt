@@ -1,6 +1,0 @@
-Bienvenue sur Simufoot ! le jeu où tu peux créer ta propre équipe pour atteindre les sommets !
-									MENU PRINCIPAL
-	1 - Accéder au tournoi
-	2 - Sauvegarder la partie
-	3 - Charger une partie
-	4 - Quitter le jeu
